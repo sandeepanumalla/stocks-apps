@@ -1,0 +1,104 @@
+
+:root{
+    --background_color:blue;
+}
+
+*{
+    padding:0;
+    margin:0px;
+}
+
+.nav_container{
+    width:100%;
+    height:10%;
+    color:white;
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    background-color: var(--background_color);
+}
+
+.big_title{
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-start;
+}
+h1{
+    padding: 0;
+    margin: 0;
+}
+
+.card_container{
+    width: 100%;
+    
+    height: 100%;
+    display: flex;
+    gap: 6rem;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+.box{
+    background-color:rgb(241, 241, 241);
+    width: 18rem;
+    margin-top: 3%;
+    /* border-color: rgb(206, 206, 206,.1) ; */
+    height:30vh;
+
+    border:1px dashed rgb(221, 218, 218);
+}
+.upper_half{
+    margin-top:1rem;
+    margin-right: 1rem;
+    height:50%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width:100%;
+  
+}
+.google_image_container{
+    height:100%;
+    background:url('../Assets/GOOGL.png');
+    background-size: contain;
+    background-repeat:no-repeat;
+    width:30%;
+  
+}
+
+.fb_image_container{
+    height:100%;
+    background:url('../Assets/FB.png');
+    background-size: contain;
+    background-repeat:no-repeat;
+    width:30%;
+      
+}
+
+.amzn_image_container{
+    height:100%;
+    background:url('../Assets/AMZN.svg');
+    background-size: contain;
+    background-repeat:no-repeat;
+    width:30%;
+
+}
+.title{
+    font-size:3rem;
+    margin-bottom: 0px;
+}
+.big_title{
+    border:1px solid black;
+    width:20%;
+    padding: 0;
+}
+.small_title{
+    position: relative;
+    top:-1.1rem;
+    left: 2.6em;
+    margin-bottom: 0px;
+}
+
+.table_container{
+
+}
