@@ -9,7 +9,7 @@ const Views = () => {
   
 
   useEffect(() => {
-    axios.get(`/getStocks`)
+    axios.get(`http://localhost:8000/getStocks`)
       .then(response => {
         setSaved(response.data);
       })
@@ -80,7 +80,11 @@ const Views = () => {
                   return  <tr key={item._id}>
                    
                         <td>{item.companyName}</td>
-                        <td>{item.symbol}</td>
+                        <td><div className="symbol">
+                        <ul >
+                         <li >{item.symbol}</li>
+                        </ul>
+                        </div></td>
                         <td>{item.marketCapitalization}</td>
                         <td><button className="btn btn-primary view" onClick={()=>onClickDelete(_id)}>Delete</button></td>
                         <td>{item.marketCapitalization}</td>
