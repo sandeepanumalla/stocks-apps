@@ -57,7 +57,7 @@ const Base = (props) => {
 
                         </div>
                         <div className="lower_half">{
-                          fangData && fangData[0].marketCapitalization
+                          fangData && fangData[0].marketCapitalization+" USD"
                         }</div>
                         </div>
                         <div className="box">
@@ -66,7 +66,7 @@ const Base = (props) => {
                                  <div  className="fb_image_container"></div>
                         </div>
                         <div className="lower_half">{
-                          fangData && fangData[1].marketCapitalization
+                          fangData && fangData[1].marketCapitalization+" USD"
                         }</div>
                         </div>
                         <div className="box">
@@ -75,7 +75,7 @@ const Base = (props) => {
                                  <div className="amzn_image_container"></div>
                         </div>
                         <div className="lower_half">{
-                          fangData && fangData[2].marketCapitalization
+                          fangData && fangData[2].marketCapitalization+" USD"
                         }</div>
                         </div>
             </div>

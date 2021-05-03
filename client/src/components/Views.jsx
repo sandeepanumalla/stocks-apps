@@ -9,7 +9,7 @@ const Views = () => {
   
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/getStocks`)
+    axios.get(`/getStocks`)
       .then(response => {
         setSaved(response.data);
       })
@@ -40,7 +40,7 @@ const Views = () => {
 
   const onClickDelete = (id)=>{
     console.log("clicked",id);
-    return fetch(`http://localhost:5000/delete/${id}`,{
+    return fetch(`/delete/${id}`,{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',

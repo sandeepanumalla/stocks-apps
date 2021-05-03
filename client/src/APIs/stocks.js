@@ -1,5 +1,5 @@
 export const getStocks = async () =>{
-  const fetchData = await fetch(`http://localhost:5000/getStocks`);
+  const fetchData = await fetch(`/getStocks`);
   return fetchData.json()
 }
 
@@ -8,7 +8,7 @@ export const saveStocks = async (Symbol) =>{
  
   const obj = {symbol:ticker,companyName:name,marketCapitalization:marketCapitalization}
   console.log(Symbol);
-  const fetchData = await fetch(`http://localhost:5000/saveStocks`,{
+  const fetchData = await fetch(`/saveStocks`,{
     method: 'POST',
     headers:{
       'Accept': 'application/json',
