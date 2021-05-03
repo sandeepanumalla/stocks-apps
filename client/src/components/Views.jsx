@@ -9,7 +9,7 @@ const Views = () => {
   
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/getStocks`)
+    axios.get(`/getStocks`)
       .then(response => {
         setSaved(response.data);
       })
