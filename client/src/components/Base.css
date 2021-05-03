@@ -202,6 +202,12 @@ button.btn.btn-primary.view{
     color: #004cf1;
     list-style-position: inside;
 }
+.load_spinner{
+    position: absolute;
+    left:35%;
+    display: flex;
+    justify-content: center;
+}
 
 @media (max-width:580px){
     .table_container{

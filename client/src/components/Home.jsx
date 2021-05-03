@@ -5,7 +5,7 @@ import { Redirect, useHistory } from 'react-router';
 import  { getStocks, saveStocks, searchByName, fetchStocks } from '../APIs/stocks';
 import { Input } from 'antd';
 import ReactPaginate from 'react-paginate';
-
+import { Spin, Space } from 'antd';
 import Base from './Base'
 import 'antd/dist/antd.min.css'
 import Pagination from './Pagination';
@@ -21,6 +21,7 @@ const Home = () => {
     const [firstIndex, setFirstIndex] = useState();
     const [searchTerm, setSearchTerm] = useState();
     const [searchResult, setSearchResult] = useState();
+    const [loading,setLoading] = useState();
     const csvfilepath = 'listing_status.csv';
     
     const fetchData =async (param) =>{
@@ -31,6 +32,7 @@ const Home = () => {
     useEffect(()=>{
 
       const fetchParams = async ()=>{
+        setLoading(true);
         const searchSymbol=[];
 
         const lastPostIndex = currentPage * 5;
@@ -53,10 +55,11 @@ const Home = () => {
             }))
             console.log('dataPromise',dataPromise);
             setData(dataPromise.slice(0,3));
+            setLoading(false);
           }
         }
         else{
-          
+          setLoading(true);
           const array = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&mic=XNYS&token=${process.env.REACT_APP_TOKEN}`);
           const response = await array.json();
           let mainData = 0;
@@ -80,6 +83,7 @@ const Home = () => {
            return response.json();
          }))
          setData(dataPromise);
+         setLoading(false);
          console.log("this is promiseData",dataPromise);
         }
         
@@ -104,9 +108,11 @@ const Home = () => {
        setSearchResult(data);
        return data
       }
+      setLoading(true)
       const timer = setTimeout(()=>{
         if(searchTerm !== undefined && searchTerm !== ""){
           fetchTheData();
+          setLoading(false);
         }
        
       },500)
@@ -183,7 +189,13 @@ const Home = () => {
                </tr>
              </thead>
              <tbody>
-             {
+             { loading ? 
+              <div className="load_spinner">
+                <Space size="middle">
+                  <h2>Loading </h2><Spin size="large" />
+                </Space>
+              </div>
+              :
                data && data.map(data =>{
                  const {ticker,name,marketCapitalization} = data;
                  
