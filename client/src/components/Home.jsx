@@ -57,7 +57,7 @@ const Home = () => {
         }
         else{
           
-          const array = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&mic=XNYS&token=c2191qqad3idupe6q9p0`);
+          const array = await fetch(`https://finnhub.io/api/v1/stock/symbol?exchange=US&mic=XNYS&token=${process.env.REACT_APP_TOKEN}`);
           const response = await array.json();
           let mainData = 0;
           if(lastPostIndex !== undefined && startingIndex !== undefined && response !== undefined) {

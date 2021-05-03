@@ -11,8 +11,6 @@ const Base = (props) => {
 
     const [fangData,setFangData] = useState();
 
-    
-
     useEffect(()=>{
       const fetchParams = async ()=>{
         

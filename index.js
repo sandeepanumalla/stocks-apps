@@ -5,14 +5,15 @@ const mongoose = require('mongoose');
 const { saveStocks } = require('./routes/saveStocks');
 const cors = require("cors");
 const stocks = require('./models/stocks');
-
+require('dotenv').config();
+const path = require('path');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-mongoose.connect(`mongodb+srv://Sandeep:Sandeep@cluster0.vybdl.mongodb.net/test`)
+mongoose.connect(process.env.mongo)
 .then(() =>console.log(`mongodb is connected successfully`))
 .catch((err)=> console.log(err));
 
@@ -23,9 +24,7 @@ app.use(cors());
 
 /* app.use(`/api/users`,saveStocks);
  */
-app.get(`/`,(req,res)=>{
-    res.send("hello world")
-})
+
 
 app.post(`/saveStocks`,(req,res)=>{
     const stock = new stocks(req.body)
@@ -60,6 +59,21 @@ app.get('/getStocks',(req,res)=>{
     })
 })
 
-app.listen(5000,()=>{
-    console.log(`server is running on ${5000}`);
+if(process.env.NODE_ENV === 'production'){
+    console.log("running production true");
+      app.use(express.static(path.join(__dirname, '/client/build')));
+      
+      app.get('*',(req,res)=>{
+        res.sendFile(path.join(__dirname,'client','build','index.html'));
+      })
+    
+    }else{
+      app.get("/", (req,res)=>{
+        res.send("Api running");
+      })
+    }
+    
+    const port = process.env.PORT || 8000
+        app.listen(port,()=>{
+        console.log(`server is running on ${port}`);
 })
