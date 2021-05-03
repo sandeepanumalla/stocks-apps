@@ -8,6 +8,7 @@ const reqString = {
 const stockSchema = new Schema({
     companyName : reqString,
     symbol: reqString,
+    marketCapitalization: reqString,
 
 })
 

@@ -5,6 +5,7 @@ import Base from './Base'
 
 const Views = () => {
   const [saved,setSaved] = useState();
+  const [data,setData] = useState();
   
 
   useEffect(() => {
@@ -14,13 +15,28 @@ const Views = () => {
       })
   },[])
 
-/* useEffect(() =>{
-  if( saved !== undefined){
-    const filter = saved.data.filter(item=> item._id != id);
-    return setSaved(filter);
-  }
-  
-},[id]) */
+  useEffect(()=>{
+    if(saved !== undefined){
+      
+      const fetchMe = async ()=>{
+        const url = [];
+        saved.map(item =>{ 
+          console.log("symbol",item)
+          url.push(`https://finnhub.io/api/v1/stock/profile2?symbol=${item.symbol}&token=${process.env.REACT_APP_TOKEN}`)
+        })
+        console.log("running",url);
+        const dataPromise = await Promise.all(url.map(async (item)=>{
+          const response = await fetch(item);
+          return response.json();
+        }))
+        console.log("dataPromse",dataPromise);
+        setData(dataPromise);
+      }
+      fetchMe();
+ 
+    }
+  },[saved])
+
 
   const onClickDelete = (id)=>{
     console.log("clicked",id);
@@ -29,7 +45,7 @@ const Views = () => {
       headers:{
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        
+
       }
     })
     .then(data => {
@@ -62,10 +78,12 @@ const Views = () => {
                saved && saved.map(item=>{
                   const {_id} = item;
                   return  <tr key={item._id}>
+                   
                         <td>{item.companyName}</td>
                         <td>{item.symbol}</td>
-                        <td></td>
-                        <td><button onClick={()=>onClickDelete(_id)}>Delete</button></td>
+                        <td>{item.marketCapitalization}</td>
+                        <td><button className="btn btn-primary view" onClick={()=>onClickDelete(_id)}>Delete</button></td>
+                        <td>{item.marketCapitalization}</td>
                   </tr>
                 })
                
@@ -74,9 +92,9 @@ const Views = () => {
                
              </tbody>
            </table>
-        <p>{JSON.stringify(saved)}</p>
-        <p>{JSON.stringify(typeof saved)}</p>
+       
              </div>
+             <div className="bottom"></div>
         </div>
     )
 }
